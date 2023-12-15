@@ -17,9 +17,8 @@ class MIDI_Preprocess:
         
     # 手の距離の生数値をhand_positionへ変換
     def distance2hand_position(self, raw_hand_distance):
-        pass  # 変換処理
-        nanika = 0 #テスト
-        self.hand_position = nanika
+        # 変換処理
+        self.hand_position = ((raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
     
     # hand_position, octave_flagをもとに, root_pitch, pitch_bendの値へ変換
     def convet2rootpitch_and_pitchbend(self):
