@@ -44,5 +44,6 @@ if __name__ == "__main__":
     midi_shori.set_lower_lim_of_hand()
     midi_shori.set_upper_lim_of_hand()
     midi_shori.set_upper_lim_of_hand()
+    midi_shori.set_octave(2)
     midi_shori.distance2hand_position(126)
     root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
