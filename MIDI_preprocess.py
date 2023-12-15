@@ -1,3 +1,4 @@
+import keyboard
 class MIDI_Preprocess:
     def __init__(self):
         self.upper_lim_of_hand = 100
@@ -5,11 +6,11 @@ class MIDI_Preprocess:
         self.octave_flag = 0
         self.hand_position = 0
     
-    def set_upper_lim_of_hand(self, position):
-        self.upper_lim_of_hand = position
+    def set_upper_lim_of_hand(self):
+        self.upper_lim_of_hand = self.hand_position
     
-    def set_lower_lim_of_hand(self, position):
-        self.lower_lim_of_hand = position
+    def set_lower_lim_of_hand(self):
+        self.lower_lim_of_hand = self.hand_position
     
     def set_octave(self, octave):
         self.octave = octave
@@ -35,8 +36,8 @@ class MIDI_Preprocess:
     
 if __name__ == "__main__":
     midi_shori = MIDI_Preprocess()
-    midi_shori.set_lower_lim_of_hand(40)
-    midi_shori.set_upper_lim_of_hand(280)
-    midi_shori.set_upper_lim_of_hand(350)
+    midi_shori.set_lower_lim_of_hand()
+    midi_shori.set_upper_lim_of_hand()
+    midi_shori.set_upper_lim_of_hand()
     midi_shori.distance2hand_position(126)
     midi_shori.convet2rootpitch_and_pitchbend()
