@@ -34,10 +34,15 @@ class MIDI_Preprocess:
             
         return root_pitch, pitch_bend_val
     
+    def bind_keys(self):
+        keyboard.on_press_key("u", lambda _: self.set_upper_lim_of_hand())
+        keyboard.on_press_key("l", lambda _: self.set_lower_lim_of_hand())
+    
 if __name__ == "__main__":
     midi_shori = MIDI_Preprocess()
+    midi_shori.bind_keys()
     midi_shori.set_lower_lim_of_hand()
     midi_shori.set_upper_lim_of_hand()
     midi_shori.set_upper_lim_of_hand()
     midi_shori.distance2hand_position(126)
-    midi_shori.convet2rootpitch_and_pitchbend()
+    root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
