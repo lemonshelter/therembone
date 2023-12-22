@@ -1,13 +1,18 @@
 import keyboard
+import time
 from math import floor
 import random
+
+# プログラムを継続するかどうかのフラグ
+running = True
+
 class MIDI_Preprocess:
     def __init__(self):
-        self.upper_lim_of_hand = 400
-        self.lower_lim_of_hand = 20
+        self.upper_lim_of_hand = 400.0
+        self.lower_lim_of_hand = 20.0
         self.octave_flag = 1
         self.hand_position = 0
-        self.raw_hand_distance = 120
+        self.raw_hand_distance = 120.0
     
     def set_upper_lim_of_hand(self):
         self.upper_lim_of_hand = self.raw_hand_distance
@@ -16,8 +21,15 @@ class MIDI_Preprocess:
         self.lower_lim_of_hand = self.raw_hand_distance
     
     def set_raw_hand_distance(self, raw_hand_distance):
-        self.raw_hand_distance = raw_hand_distance
-    
+        # 手の距離（raw_hand_distance）が上限値より大きい場合
+        if raw_hand_distance > self.upper_lim_of_hand:
+            self.raw_hand_distance = self.upper_lim_of_hand # 上限値を代入
+        # 手の距離（raw_hand_distance）が下限値より小さい場合
+        elif raw_hand_distance < self.lower_lim_of_hand:
+            self.raw_hand_distance = self.lower_lim_of_hand # 下限値を代入
+        else:
+            self.raw_hand_distance = raw_hand_distance
+        
     def set_octave(self, octave):
         self.octave = octave
         
@@ -41,31 +53,53 @@ class MIDI_Preprocess:
     
     def on_key_press(self,key):
         try:
-            if key.name == 'u':
-                self.set_upper_lim_of_hand()
+            if key.name == 'u':# uキーが押された際に上限値を設定
                 print("Uキーが押されました。")
-                print("上限値", self.upper_lim_of_hand)
-            elif key.name == 'l':
-                self.set_lower_lim_of_hand()
+                if self.raw_hand_distance > self.lower_lim_of_hand:
+                    self.set_upper_lim_of_hand()
+                    print("上限値", self.upper_lim_of_hand)
+                else:# 更新する値が下限値より小さい場合
+                    print("上限値を更新できませんでした。")
+
+            elif key.name == 'l':# lキーが押された際に下限値を設定
                 print("Lキーが押されました。")
+                if self.raw_hand_distance < self.upper_lim_of_hand:
+                    self.set_lower_lim_of_hand()
+                    print("下限値", self.lower_lim_of_hand)
+                else:# 更新する値が上限値より大きい場合
+                    print("下限値を更新できませんでした。")
+
+            elif key.name == 't': # 変数情報の表示
+                print("手の位置(mm)",self.raw_hand_distance)
+                print("上限値", self.upper_lim_of_hand)
                 print("下限値", self.lower_lim_of_hand)
-            elif key.name == 'r':
-                self.distance2hand_position()
-                print("腕の位置(mm)",)
+                print(f"{root_pitch=}, {pitch_bend_val=},{self.hand_position=}")
+
+            elif key.name == 'i': # 手の位置(raw_hand_distance)をキーボード入力
+                raw_hand_distance_input = input("数字を入力してください: ")
+                self.set_raw_hand_distance(float(raw_hand_distance_input))
+
+            elif key.name == 'esc': # escでプログラムを終了
+                print("ESCキーが押されました。プログラムを終了します。")
+                running = False  # ループを終了するためにフラグを変更
+
         except AttributeError:
             pass  # キーにname属性がない場合の例外処理
     
     def bind_keys(self):
-      keyboard.on_press(self.on_key_press)
+        keyboard.on_press(self.on_key_press)# キー押下イベントに関数をバインド
     
 if __name__ == "__main__":
     midi_shori = MIDI_Preprocess()
     midi_shori.bind_keys()
-    # midi_shori.set_lower_lim_of_hand()
-    # midi_shori.set_upper_lim_of_hand()
-    # midi_shori.set_upper_lim_of_hand()
-    midi_shori.set_octave(2)
-    midi_shori.distance2hand_position()
-    root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
-    print(f"{root_pitch=}, {pitch_bend_val=}")
-    keyboard.wait('esc')
+    # メインループ(仮)
+    try:
+        while running:
+            #手の位置をリアルタイムで取得
+            #midi_shori.set_raw_hand_distance()
+            midi_shori.distance2hand_position()
+            midi_shori.set_octave(2)
+            root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
+            time.sleep(0.1) # キーの連続検出を防ぐための遅延
+    except KeyboardInterrupt:
+        pass    # キーボード割り込みが発生した場合もプログラムを終了
