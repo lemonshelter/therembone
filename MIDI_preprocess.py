@@ -3,11 +3,11 @@ from math import floor
 import random
 class MIDI_Preprocess:
     def __init__(self):
-        self.upper_lim_of_hand = 100
-        self.lower_lim_of_hand = 0
+        self.upper_lim_of_hand = 400
+        self.lower_lim_of_hand = 20
         self.octave_flag = 1
         self.hand_position = 0
-        self.raw_hand_distance = 80
+        self.raw_hand_distance = 120
     
     def set_upper_lim_of_hand(self):
         self.upper_lim_of_hand = self.raw_hand_distance
