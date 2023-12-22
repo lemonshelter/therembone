@@ -7,20 +7,24 @@ class MIDI_Preprocess:
         self.lower_lim_of_hand = 0
         self.octave_flag = 1
         self.hand_position = 0
+        self.raw_hand_distance = 80
     
     def set_upper_lim_of_hand(self):
-        self.upper_lim_of_hand = self.hand_position
+        self.upper_lim_of_hand = self.raw_hand_distance
     
     def set_lower_lim_of_hand(self):
-        self.lower_lim_of_hand = self.hand_position
+        self.lower_lim_of_hand = self.raw_hand_distance
+    
+    def set_raw_hand_distance(self, raw_hand_distance):
+        self.raw_hand_distance = raw_hand_distance
     
     def set_octave(self, octave):
         self.octave = octave
         
     # 手の距離の生数値をhand_positionへ変換
-    def distance2hand_position(self, raw_hand_distance):
+    def distance2hand_position(self):
         # 変換処理
-        self.hand_position = ((raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
+        self.hand_position = ((self.raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
     
     # hand_position, octave_flagをもとに, root_pitch, pitch_bendの値へ変換
     def convet2rootpitch_and_pitchbend(self):
@@ -46,7 +50,7 @@ class MIDI_Preprocess:
                 print("Lキーが押されました。")
                 print("下限値", self.lower_lim_of_hand)
             elif key.name == 'r':
-                self.distance2hand_position(random.randint(1,400))
+                self.distance2hand_position()
                 print("腕の位置(mm)",)
         except AttributeError:
             pass  # キーにname属性がない場合の例外処理
@@ -61,7 +65,7 @@ if __name__ == "__main__":
     # midi_shori.set_upper_lim_of_hand()
     # midi_shori.set_upper_lim_of_hand()
     midi_shori.set_octave(2)
-    midi_shori.distance2hand_position(100)
+    midi_shori.distance2hand_position()
     root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
     print(f"{root_pitch=}, {pitch_bend_val=}")
     keyboard.wait('esc')
