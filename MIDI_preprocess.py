@@ -1,5 +1,6 @@
 import keyboard
 from math import floor
+import random
 class MIDI_Preprocess:
     def __init__(self):
         self.upper_lim_of_hand = 100
@@ -34,9 +35,24 @@ class MIDI_Preprocess:
             
         return root_pitch, pitch_bend_val
     
+    def on_key_press(self,key):
+        try:
+            if key.name == 'u':
+                self.set_upper_lim_of_hand()
+                print("Uキーが押されました。")
+                print("上限値", self.upper_lim_of_hand)
+            elif key.name == 'l':
+                self.set_lower_lim_of_hand()
+                print("Lキーが押されました。")
+                print("下限値", self.lower_lim_of_hand)
+            elif key.name == 'r':
+                self.distance2hand_position(random.randint(1,400))
+                print("腕の位置(mm)",)
+        except AttributeError:
+            pass  # キーにname属性がない場合の例外処理
+    
     def bind_keys(self):
-        keyboard.on_press_key("u", lambda _: self.set_upper_lim_of_hand())
-        keyboard.on_press_key("l", lambda _: self.set_lower_lim_of_hand())
+      keyboard.on_press(self.on_key_press)
     
 if __name__ == "__main__":
     midi_shori = MIDI_Preprocess()
@@ -45,6 +61,7 @@ if __name__ == "__main__":
     # midi_shori.set_upper_lim_of_hand()
     # midi_shori.set_upper_lim_of_hand()
     midi_shori.set_octave(2)
-    midi_shori.distance2hand_position(126)
+    midi_shori.distance2hand_position(100)
     root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
     print(f"{root_pitch=}, {pitch_bend_val=}")
+    keyboard.wait('esc')
