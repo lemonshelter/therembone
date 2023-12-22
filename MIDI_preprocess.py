@@ -31,7 +31,7 @@ class MIDI_Preprocess:
             root_pitch = 0
             pitch_bend_val = 0
         else:
-            root_pitch = (self.octave_flag+3) * 12 + (nth_root-2)
+            root_pitch = int((self.octave_flag+3) * 12 + (nth_root-2))
             
         return root_pitch, pitch_bend_val
     
