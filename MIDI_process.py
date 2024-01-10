@@ -13,7 +13,7 @@ class MIDI_Process:
         self.lower_lim_of_hand = 20.0
         self.octave_flag = 1  # 0:off 1:low 2:nutral 3:high
         self.hand_position = 0
-        self.raw_hand_distance = 120.0
+        self.raw_hand_distance = 120.0 # 距離センサーから得た値
         self.root_pitch = 48
         self.pitch_bend_val = 0
     
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     # メインループ(仮)
     try:
         while running:
-            #手の位置をリアルタイム　取得
+            #手の位置をリアルタイムで取得
             #midi_shori.set_raw_hand_distance()
             
             midi_shori.distance2hand_position()
@@ -123,7 +123,7 @@ if __name__ == "__main__":
             midi_shori.convet2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
-            #　オクターブフラグが1以上で音を鳴らす
+            # オクターブフラグが1以上で音を鳴らす
             if midi_shori.octave_flag >= 1:
                 midi_out.play_note(midi_shori.root_pitch,midi_shori.pitch_bend_val)
                 time.sleep(0.8)
