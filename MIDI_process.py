@@ -11,7 +11,7 @@ class MIDI_Process:
     def __init__(self):
         self.upper_lim_of_hand = 400.0
         self.lower_lim_of_hand = 20.0
-        self.octave_flag = 1
+        self.octave_flag = 1  # 0:off 1:low 2:nutral 3:high
         self.hand_position = 0
         self.raw_hand_distance = 120.0
         self.root_pitch = 48
