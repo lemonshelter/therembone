@@ -31,7 +31,7 @@ class MIDI_Preprocess:
         # 変換処理
         self.hand_position = ((self.raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
     # hand_positonの範囲をきめる
-    def limit_hand_position_within_range(self,raw_hand_distance):
+    def limit_hand_position_within_range(self):
          # 手の距離（raw_hand_distance）が上限値より大きい場合
         if self.raw_hand_distance > self.upper_lim_of_hand:
             self.hand_position =  65536.0 # hand_positionの最大値を代入
