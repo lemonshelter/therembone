@@ -117,14 +117,15 @@ if __name__ == "__main__":
             #midi_shori.set_raw_hand_distance()
             
             midi_shori.distance2hand_position()
-            midi_shori.set_raw_hand_distance(2600)
+            #midi_shori.set_raw_hand_distance(2600)
             midi_shori.limit_hand_position_within_range()
-            midi_shori.set_octave(1)
+            #midi_shori.set_octave(1)
             midi_shori.convet2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
             #　オクターブフラグが1以上で音を鳴らす
             if midi_shori.octave_flag >= 1:
+                midi_out.stop_note(root_pitch)
                 midi_out.play_note(root_pitch,pitch_bend_val)
             #time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
