@@ -85,11 +85,16 @@ class MIDI_Process:
                 print("手の位置(mm)",self.raw_hand_distance)
                 print("上限値", self.upper_lim_of_hand)
                 print("下限値", self.lower_lim_of_hand)
+                print("オクターブ", self.octave_flag)
                 print(f"{root_pitch=}, {pitch_bend_val=},{self.hand_position=}")
 
             elif key.name == 'i': # 手の位置(raw_hand_distance)をキーボード入力
                 raw_hand_distance_input = input("数字を入力してください: ")
                 self.set_raw_hand_distance(float(raw_hand_distance_input))
+
+            elif key.name == 'o': # オクターブ変更
+                print("Oキーが押されました。")
+                self.octave_flag = int(input("数字を入力してください: "))
 
             elif key.name == 'esc': # escでプログラムを終了
                 print("ESCキーが押されました。プログラムを終了します。")
@@ -114,11 +119,13 @@ if __name__ == "__main__":
             midi_shori.distance2hand_position()
             midi_shori.set_raw_hand_distance(2600)
             midi_shori.limit_hand_position_within_range()
-            midi_shori.set_octave(2)
+            midi_shori.set_octave(1)
             midi_shori.convet2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
-            midi_out.play_note(root_pitch,pitch_bend_val)
-            time.sleep(0.1) # キーの連続検出を防ぐための遅延
+            #　オクターブフラグが1以上で音を鳴らす
+            if midi_shori.octave_flag >= 1:
+                midi_out.play_note(root_pitch,pitch_bend_val)
+            #time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
         pass    # キーボード割り込みが発生した場合もプログラムを終了
