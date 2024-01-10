@@ -1,4 +1,5 @@
 import pygame.midi
+import time
 
 class MIDI2sound:
     def __init__(self):
@@ -16,10 +17,9 @@ class MIDI2sound:
     def play_note(self, root_pitch, pitch_bend_val):
         self.midi_out.pitch_bend(pitch_bend_val)  # ピッチベンドの値を設定
         self.midi_out.note_on(root_pitch, 127)  # 音を鳴らす（ピッチ、ベロシティ）
-        #time.sleep(0.1)  # 遅延
     #音を止める
     def stop_note(self,root_pitch):
-        self.midi_out.note_off(root_pitch,127)
+        self.midi_out.note_off(root_pitch,0)
 
 # Pygameの終了
 pygame.midi.quit()

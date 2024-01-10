@@ -126,8 +126,8 @@ if __name__ == "__main__":
             #　オクターブフラグが1以上で音を鳴らす
             if midi_shori.octave_flag >= 1:
                 midi_out.play_note(midi_shori.root_pitch,midi_shori.pitch_bend_val)
-                time.sleep(0.1)
+                time.sleep(0.8)
                 midi_out.stop_note(midi_shori.root_pitch)
             #time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
-        pass    # キーボード割り込みが発生した場合もプログラムを終了
+        pass    # キーボード割り込みが発生した場合もプログラムを終#了
