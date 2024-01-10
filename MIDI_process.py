@@ -6,7 +6,7 @@ import random
 # プログラムを継続するかどうかのフラグ
 running = True
 
-class MIDI_Preprocess:
+class MIDI_Process:
     def __init__(self):
         self.upper_lim_of_hand = 400.0
         self.lower_lim_of_hand = 20.0
@@ -92,7 +92,7 @@ class MIDI_Preprocess:
         keyboard.on_press(self.on_key_press)# キー押下イベントに関数をバインド
     
 if __name__ == "__main__":
-    midi_shori = MIDI_Preprocess()
+    midi_shori = MIDI_Process()
     midi_shori.bind_keys()
     # メインループ(仮)
     try:
