@@ -2,6 +2,7 @@ import keyboard
 import time
 from math import floor
 import random
+from MIDI2sound import MIDI2sound
 
 # プログラムを継続するかどうかのフラグ
 running = True
@@ -57,7 +58,7 @@ class MIDI_Process:
             root_pitch = 0
             pitch_bend_val = 0
         else:
-            root_pitch = int((self.octave_flag+3) * 12 + (nth_root-2))
+            root_pitch = int((self.octave_flag+2) * 12 + (nth_root-2))
         
         self.root_pitch = root_pitch
         self.pitch_bend_val = pitch_bend_val
@@ -103,11 +104,13 @@ class MIDI_Process:
 if __name__ == "__main__":
     midi_shori = MIDI_Process()
     midi_shori.bind_keys()
+    midi_out = MIDI2sound()
     # メインループ(仮)
     try:
         while running:
             #手の位置をリアルタイムで取得
             #midi_shori.set_raw_hand_distance()
+            
             midi_shori.distance2hand_position()
             midi_shori.set_raw_hand_distance(2600)
             midi_shori.limit_hand_position_within_range()
@@ -115,6 +118,7 @@ if __name__ == "__main__":
             midi_shori.convet2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
+            midi_out.play_note(root_pitch,pitch_bend_val)
             time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
         pass    # キーボード割り込みが発生した場合もプログラムを終了
