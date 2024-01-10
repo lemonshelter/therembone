@@ -13,6 +13,8 @@ class MIDI_Process:
         self.octave_flag = 1
         self.hand_position = 0
         self.raw_hand_distance = 120.0
+        self.root_pitch = 48
+        self.pitch_bend_val = 0
     
     def set_upper_lim_of_hand(self):
         self.upper_lim_of_hand = self.raw_hand_distance
@@ -25,6 +27,12 @@ class MIDI_Process:
         
     def set_octave(self, octave):
         self.octave = octave
+    
+    def get_root_pitch(self):
+        return self.root_pitch
+
+    def get_pitch_bend_val(self):
+        return self.pitch_bend_val
         
     # 手の距離の生数値をhand_positionへ変換
     def distance2hand_position(self):
@@ -50,8 +58,9 @@ class MIDI_Process:
             pitch_bend_val = 0
         else:
             root_pitch = int((self.octave_flag+3) * 12 + (nth_root-2))
-            
-        return root_pitch, pitch_bend_val
+        
+        self.root_pitch = root_pitch
+        self.pitch_bend_val = pitch_bend_val
     
     def on_key_press(self,key):
         try:
@@ -103,7 +112,9 @@ if __name__ == "__main__":
             midi_shori.set_raw_hand_distance(2600)
             midi_shori.limit_hand_position_within_range()
             midi_shori.set_octave(2)
-            root_pitch, pitch_bend_val = midi_shori.convet2rootpitch_and_pitchbend()
+            midi_shori.convet2rootpitch_and_pitchbend()
+            root_pitch = midi_shori.get_root_pitch()
+            pitch_bend_val = midi_shori.get_pitch_bend_val()
             time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
         pass    # キーボード割り込みが発生した場合もプログラムを終了
