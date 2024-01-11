@@ -39,8 +39,11 @@ class MIDI_Process:
     def distance2hand_position(self):
         # 変換処理
         self.hand_position = ((self.raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
-    # hand_positonの範囲をきめる
-    def limit_hand_position_within_range(self):
+        # 上下限処理
+        self._limit_hand_position_within_range()
+        
+    # hand_positonを範囲内に収める
+    def _limit_hand_position_within_range(self):
          # 手の距離（raw_hand_distance）が上限値より大きい場合
         if self.raw_hand_distance > self.upper_lim_of_hand:
             self.hand_position =  65536.0 # hand_positionの最大値を代入
@@ -118,7 +121,6 @@ if __name__ == "__main__":
             
             midi_shori.distance2hand_position()
             #midi_shori.set_raw_hand_distance(2600)
-            midi_shori.limit_hand_position_within_range()
             #midi_shori.set_octave(1)
             midi_shori.convet2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
@@ -130,4 +132,4 @@ if __name__ == "__main__":
                 midi_out.stop_note(midi_shori.root_pitch)
             #time.sleep(0.1) # キーの連続検出を防ぐための遅延
     except KeyboardInterrupt:
-        pass    # キーボード割り込みが発生した場合もプログラムを終#了
+        pass    # キーボード割り込みが発生した場合もプログラムを終了
