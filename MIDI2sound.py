@@ -23,5 +23,21 @@ class MIDI2sound:
     def stop_note(self, root_pitch):
         self.midi_out.note_off(root_pitch, 0)
 
-# Pygameの終了
-pygame.midi.quit()
+    # Pygameの終了
+    def quit(self):
+        pygame.midi.quit()
+
+
+if __name__ == "__main__":
+    midi2sound = MIDI2sound()
+
+    midi2sound.play_note(44, 0)
+    time.sleep(1)
+    midi2sound.stop_note(44, 0)
+
+    for i in range(8192):
+        midi2sound.play_note(44, i)
+        time.sleep(0.001)
+        midi2sound.stop_note(44, i)
+
+    midi2sound.quit()
