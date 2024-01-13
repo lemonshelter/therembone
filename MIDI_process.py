@@ -15,33 +15,33 @@ class MIDI_Process:
         self.hand_position = 0
         self.raw_hand_distance = 120.0 # 距離センサーから得た値
         self.root_pitch = 48
-        self.pitch_bend_val = 0
-    
+        self.pitch_bend_val = 0  # -8192～+8191の範囲で+4096で半音高く,-8192で全音低くなる
+
     def set_upper_lim_of_hand(self):
         self.upper_lim_of_hand = self.raw_hand_distance
-    
+
     def set_lower_lim_of_hand(self):
         self.lower_lim_of_hand = self.raw_hand_distance
-    
+
     def set_raw_hand_distance(self, raw_hand_distance):
         self.raw_hand_distance = raw_hand_distance
-        
+
     def set_octave(self, octave):
         self.octave = octave
-    
+
     def get_root_pitch(self):
         return self.root_pitch
 
     def get_pitch_bend_val(self):
         return self.pitch_bend_val
-        
+
     # 手の距離の生数値をhand_positionへ変換
     def distance2hand_position(self):
         # 変換処理
         self.hand_position = ((self.raw_hand_distance-self.lower_lim_of_hand)/(self.upper_lim_of_hand-self.lower_lim_of_hand))*65536
         # 上下限処理
         self._limit_hand_position_within_range()
-        
+
     # hand_positonを範囲内に収める
     def _limit_hand_position_within_range(self):
          # 手の距離（raw_hand_distance）が上限値より大きい場合
@@ -62,10 +62,10 @@ class MIDI_Process:
             pitch_bend_val = 0
         else:
             root_pitch = int((self.octave_flag+2) * 12 + (nth_root-2))
-        
+
         self.root_pitch = root_pitch
         self.pitch_bend_val = pitch_bend_val
-    
+
     def on_key_press(self,key):
         try:
             if key.name == 'u':# uキーが押された際に上限値を設定
@@ -105,10 +105,10 @@ class MIDI_Process:
 
         except AttributeError:
             pass  # キーにname属性がない場合の例外処理
-    
+
     def bind_keys(self):
         keyboard.on_press(self.on_key_press)# キー押下イベントに関数をバインド
-    
+
 if __name__ == "__main__":
     midi_shori = MIDI_Process()
     midi_shori.bind_keys()
@@ -118,7 +118,7 @@ if __name__ == "__main__":
         while running:
             #手の位置をリアルタイムで取得
             #midi_shori.set_raw_hand_distance()
-            
+
             midi_shori.distance2hand_position()
             #midi_shori.set_raw_hand_distance(2600)
             #midi_shori.set_octave(1)
