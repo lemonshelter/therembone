@@ -31,13 +31,13 @@ class MIDI2sound:
 if __name__ == "__main__":
     midi2sound = MIDI2sound()
 
-    midi2sound.play_note(44, 0)
+    midi2sound.play_note(48, 0)
     time.sleep(1)
-    midi2sound.stop_note(44, 0)
+    midi2sound.stop_note(48, 0)
 
     for i in range(8192):
-        midi2sound.play_note(44, i)
+        midi2sound.play_note(48, i)
         time.sleep(0.001)
-        midi2sound.stop_note(44, i)
+        midi2sound.stop_note(48, i)
 
     midi2sound.quit()
