@@ -26,13 +26,13 @@ class MIDI2sound:
     
     # 連続で音を鳴らす
     def play_continuously(self, root_pitch, pitch_bend_val):
-        midi2sound.play_note(root_pitch, pitch_bend_val, channel=0)
+        self.play_note(root_pitch, pitch_bend_val, channel=0)
         time.sleep(0.05)
-        midi2sound.stop_note(root_pitch, channel=1)
+        self.stop_note(root_pitch, channel=1)
         time.sleep(0.2)
-        midi2sound.play_note(root_pitch, pitch_bend_val, channel=1)
+        self.play_note(root_pitch, pitch_bend_val, channel=1)
         time.sleep(0.05)
-        midi2sound.stop_note(root_pitch, channel=0)
+        self.stop_note(root_pitch, channel=0)
         time.sleep(0.2)
 
     # Pygameの終了
