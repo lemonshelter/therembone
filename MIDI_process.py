@@ -127,9 +127,9 @@ if __name__ == "__main__":
             pitch_bend_val = midi_shori.get_pitch_bend_val()
             # オクターブフラグが1以上で音を鳴らす
             if midi_shori.octave_flag >= 1:
-                midi_out.play_note(midi_shori.root_pitch,midi_shori.pitch_bend_val)
-                time.sleep(0.8)
-                midi_out.stop_note(midi_shori.root_pitch)
-            #time.sleep(0.1) # キーの連続検出を防ぐための遅延
+                midi_out.play_continuously(midi_shori.root_pitch,midi_shori.pitch_bend_val)
+            # オクターブフラグが0で音を止める
+            if midi_shori.octave_flag == 0:
+                midi_out.stop_continuos_play()
     except KeyboardInterrupt:
         pass    # キーボード割り込みが発生した場合もプログラムを終了
