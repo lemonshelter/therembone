@@ -89,7 +89,7 @@ class MIDI_Process:
                 print("上限値", self.upper_lim_of_hand)
                 print("下限値", self.lower_lim_of_hand)
                 print("オクターブ", self.octave_flag)
-                print(f"{root_pitch=}, {pitch_bend_val=},{self.hand_position=}")
+                print(f"{self.root_pitch=}, {self.pitch_bend_val=},{self.hand_position=}")
 
             elif key.name == 'i': # 手の位置(raw_hand_distance)をキーボード入力
                 raw_hand_distance_input = input("数字を入力してください: ")
