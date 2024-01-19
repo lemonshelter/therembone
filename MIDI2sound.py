@@ -38,6 +38,11 @@ class MIDI2sound:
         self.stop_note(root_pitch, channel=0)
         time.sleep(0.2)
         self.retained_note = root_pitch
+    
+    # すべてのnoteをストップ
+    def stop_all_note(self):
+        self.stop_note(self.retained_note, channel=0)
+        self.stop_note(self.retained_note, channel=1)
 
     # Pygameの終了
     def quit(self):
