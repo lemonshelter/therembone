@@ -16,13 +16,14 @@ while True:
     """
     指のクラス分類
     """
+    # オクターブ情報を受け取り
     midi_process.set_octave(2)  # 実際は認識した値が入る
     
     """
     距離測定
     """
     # 距離の生データを受け取り
-    midi_process.set_raw_hand_distance(111) # (仮)
+    midi_process.set_raw_hand_distance(111)  # 実際は認識した値が入る
     
     
     """
