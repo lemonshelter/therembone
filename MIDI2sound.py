@@ -23,6 +23,17 @@ class MIDI2sound:
     #音を止める
     def stop_note(self, root_pitch, channel):
         self.midi_out.note_off(root_pitch, velocity=0, channel=channel)
+    
+    # 連続で音を鳴らす
+    def play_continuously(self, root_pitch, pitch_bend_val):
+        midi2sound.play_note(root_pitch, pitch_bend_val, channel=0)
+        time.sleep(0.05)
+        midi2sound.stop_note(root_pitch, channel=1)
+        time.sleep(0.2)
+        midi2sound.play_note(root_pitch, pitch_bend_val, channel=1)
+        time.sleep(0.05)
+        midi2sound.stop_note(root_pitch, channel=0)
+        time.sleep(0.2)
 
     # Pygameの終了
     def quit(self):
@@ -36,16 +47,21 @@ if __name__ == "__main__":
     time.sleep(1)
     midi2sound.stop_note(48, channel=0)
 
-    for i in range(8192):
-        midi2sound.play_note(48, 0, channel=0)
-        time.sleep(0.05)
-        midi2sound.stop_note(48, channel=1)
-        print(0)
-        time.sleep(0.5)
-        midi2sound.play_note(48, 0, channel=1)
-        time.sleep(0.05)
-        midi2sound.stop_note(48, channel=0)
-        print(1)
-        time.sleep(0.5)
+    # for i in range(10):
+    #     midi2sound.play_note(60, 0, channel=0)
+    #     time.sleep(0.05)
+    #     midi2sound.stop_note(60, channel=1)
+    #     print(0)
+    #     time.sleep(0.2)
+    #     midi2sound.play_note(60, 0, channel=1)
+    #     time.sleep(0.05)
+    #     midi2sound.stop_note(60, channel=0)
+    #     print(1)
+    #     time.sleep(0.2)
+    
+    time.sleep(3)
+    
+    for i in range(100):
+        midi2sound.play_continuously(60, 0)
 
     midi2sound.quit()
