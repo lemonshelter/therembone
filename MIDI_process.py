@@ -11,7 +11,7 @@ class MIDI_Process:
     def __init__(self):
         self.upper_lim_of_hand = 400.0
         self.lower_lim_of_hand = 20.0
-        self.octave_flag = 1  # 0:off 1:low 2:nutral 3:high
+        self.octave = 1  # 0:off 1:low 2:nutral 3:high
         self.hand_position = 0
         self.raw_hand_distance = 120.0 # 距離センサーから得た値
         self.root_pitch = 48
@@ -52,16 +52,16 @@ class MIDI_Process:
         elif self.raw_hand_distance < self.lower_lim_of_hand:
             self.hand_position = 0.0 # hand_positionの最小値を代入
 
-    # hand_position, octave_flagをもとに, root_pitch, pitch_bendの値へ変換
+    # hand_position, octaveをもとに, root_pitch, pitch_bendの値へ変換
     def convert2rootpitch_and_pitchbend(self):
         # 遊びを含めてA#~Dまでの何番目か
         nth_root = self.hand_position // 4096
         pitch_bend_val = floor(self.hand_position - nth_root*4096)
-        if self.octave_flag == 0:  # 音量オフ
+        if self.octave == 0:  # 音量オフ
             root_pitch = 0
             pitch_bend_val = 0
         else:
-            root_pitch = int((self.octave_flag+2) * 12 + (nth_root-2))
+            root_pitch = int((self.octave+2) * 12 + (nth_root-2))
 
         self.root_pitch = root_pitch
         self.pitch_bend_val = pitch_bend_val
@@ -88,7 +88,7 @@ class MIDI_Process:
                 print("手の位置(mm)",self.raw_hand_distance)
                 print("上限値", self.upper_lim_of_hand)
                 print("下限値", self.lower_lim_of_hand)
-                print("オクターブ", self.octave_flag)
+                print("オクターブ", self.octave)
                 print(f"{self.root_pitch=}, {self.pitch_bend_val=},{self.hand_position=}")
 
             elif key.name == 'i': # 手の位置(raw_hand_distance)をキーボード入力
@@ -97,7 +97,7 @@ class MIDI_Process:
 
             elif key.name == 'o': # オクターブ変更
                 print("Oキーが押されました。")
-                self.octave_flag = int(input("数字を入力してください: "))
+                self.octave = int(input("数字を入力してください: "))
 
             elif key.name == 'esc': # escでプログラムを終了
                 print("ESCキーが押されました。プログラムを終了します。")
@@ -126,10 +126,10 @@ if __name__ == "__main__":
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
             # オクターブフラグが1以上で音を鳴らす
-            if midi_shori.octave_flag >= 1:
+            if midi_shori.octave >= 1:
                 midi_out.play_continuously(midi_shori.root_pitch,midi_shori.pitch_bend_val)
             # オクターブフラグが0で音を止める
-            if midi_shori.octave_flag == 0:
+            if midi_shori.octave == 0:
                 midi_out.stop_continuos_play()
     except KeyboardInterrupt:
         pass    # キーボード割り込みが発生した場合もプログラムを終了
