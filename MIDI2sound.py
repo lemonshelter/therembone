@@ -15,6 +15,9 @@ class MIDI2sound:
         # トロンボーンの音色に設定
         self.midi_out.set_instrument(57, channel=0)
         self.midi_out.set_instrument(57, channel=1)
+        
+        # play_continuouslyでnote_stopするためにnoteを保持
+        self.retained_note = 48
 
     #音を鳴らす
     def play_note(self, root_pitch, pitch_bend_val, channel):
@@ -28,12 +31,13 @@ class MIDI2sound:
     def play_continuously(self, root_pitch, pitch_bend_val):
         self.play_note(root_pitch, pitch_bend_val, channel=0)
         time.sleep(0.05)
-        self.stop_note(root_pitch, channel=1)
+        self.stop_note(self.retained_note, channel=1)
         time.sleep(0.2)
         self.play_note(root_pitch, pitch_bend_val, channel=1)
         time.sleep(0.05)
         self.stop_note(root_pitch, channel=0)
         time.sleep(0.2)
+        self.retained_note = root_pitch
 
     # Pygameの終了
     def quit(self):
