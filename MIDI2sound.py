@@ -3,7 +3,7 @@ import time
 
 VELOCITY = 127
 
-class MIDI2sound:
+class MIDI2Sound:
     def __init__(self):
         # MIDIデバイスの初期化
         pygame.midi.init()
@@ -49,7 +49,7 @@ class MIDI2sound:
 
 
 if __name__ == "__main__":
-    midi2sound = MIDI2sound()
+    midi2sound = MIDI2Sound()
 
     midi2sound.play_note(48, 0, channel=0)
     time.sleep(1)

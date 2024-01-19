@@ -2,7 +2,7 @@ import keyboard
 import time
 from math import floor
 import random
-from MIDI2sound import MIDI2sound
+from MIDI2sound import MIDI2Sound
 
 # プログラムを継続するかどうかのフラグ
 running = True
@@ -112,7 +112,7 @@ class MIDI_Process:
 if __name__ == "__main__":
     midi_shori = MIDI_Process()
     midi_shori.bind_keys()
-    midi_out = MIDI2sound()
+    midi_out = MIDI2Sound()
     # メインループ(仮)
     try:
         while running:
