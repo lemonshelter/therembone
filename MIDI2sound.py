@@ -13,15 +13,16 @@ class MIDI2sound:
         self.midi_out = pygame.midi.Output(self.device_id)
 
         # トロンボーンの音色に設定
-        self.midi_out.set_instrument(57)
+        self.midi_out.set_instrument(57, channel=0)
+        self.midi_out.set_instrument(57, channel=1)
 
     #音を鳴らす
-    def play_note(self, root_pitch, pitch_bend_val):
-        self.midi_out.pitch_bend(pitch_bend_val)  # ピッチベンドの値を設定
-        self.midi_out.note_on(root_pitch, VELOCITY)  # 音を鳴らす（ピッチ、ベロシティ）
+    def play_note(self, root_pitch, pitch_bend_val, channel):
+        self.midi_out.pitch_bend(pitch_bend_val, channel=channel)  # ピッチベンドの値を設定
+        self.midi_out.note_on(root_pitch, velocity=VELOCITY, channel=channel)  # 音を鳴らす（ピッチ、ベロシティ）
     #音を止める
-    def stop_note(self, root_pitch):
-        self.midi_out.note_off(root_pitch, 0)
+    def stop_note(self, root_pitch, channel):
+        self.midi_out.note_off(root_pitch, velocity=0, channel=channel)
 
     # Pygameの終了
     def quit(self):
@@ -31,13 +32,20 @@ class MIDI2sound:
 if __name__ == "__main__":
     midi2sound = MIDI2sound()
 
-    midi2sound.play_note(48, 0)
+    midi2sound.play_note(48, 0, channel=0)
     time.sleep(1)
-    midi2sound.stop_note(48)
+    midi2sound.stop_note(48, channel=0)
 
     for i in range(8192):
-        midi2sound.play_note(48, i)
-        time.sleep(0.001)
-        midi2sound.stop_note(48)
+        midi2sound.play_note(48, 0, channel=0)
+        time.sleep(0.05)
+        midi2sound.stop_note(48, channel=1)
+        print(0)
+        time.sleep(0.5)
+        midi2sound.play_note(48, 0, channel=1)
+        time.sleep(0.05)
+        midi2sound.stop_note(48, channel=0)
+        print(1)
+        time.sleep(0.5)
 
     midi2sound.quit()
