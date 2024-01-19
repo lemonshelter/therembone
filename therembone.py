@@ -8,19 +8,21 @@ distance_sensor = DistanceSensor()
 midi_process = MIDI_Process()
 midi2sound = MIDI2Sound()
 
+# キーボードによる制御
+# hand_positionの上下限などを設定する
 midi_process.bind_keys()
 
 while True:
     """
     指のクラス分類
     """
-    
+    midi_process.set_octave(2)  # 実際は認識した値が入る
     
     """
     距離測定
     """
     # 距離の生データを受け取り
-    midi_process.set_raw_hand_distance(111) # (仮)
+    midi_process.set_raw_hand_distance(111)  # 実際は認識した値が入る
     
     
     """
