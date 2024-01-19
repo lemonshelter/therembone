@@ -53,7 +53,7 @@ class MIDI_Process:
             self.hand_position = 0.0 # hand_positionの最小値を代入
 
     # hand_position, octave_flagをもとに, root_pitch, pitch_bendの値へ変換
-    def convet2rootpitch_and_pitchbend(self):
+    def convert2rootpitch_and_pitchbend(self):
         # 遊びを含めてA#~Dまでの何番目か
         nth_root = self.hand_position // 4096
         pitch_bend_val = floor(self.hand_position - nth_root*4096)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
             midi_shori.distance2hand_position()
             #midi_shori.set_raw_hand_distance(2600)
             #midi_shori.set_octave(1)
-            midi_shori.convet2rootpitch_and_pitchbend()
+            midi_shori.convert2rootpitch_and_pitchbend()
             root_pitch = midi_shori.get_root_pitch()
             pitch_bend_val = midi_shori.get_pitch_bend_val()
             # オクターブフラグが1以上で音を鳴らす
