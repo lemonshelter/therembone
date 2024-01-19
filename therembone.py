@@ -19,15 +19,12 @@ while True:
     # オクターブ情報を受け取り
     midi_process.set_octave(2)  # 実際は認識した値が入る
     
+    
     """
     距離測定
     """
     # 距離の生データを受け取り
-<<<<<<< HEAD
     midi_process.set_raw_hand_distance(111)  # 実際は認識した値が入る
-=======
-    #midi_process.set_raw_hand_distance(111) # (仮)
->>>>>>> e010de3e41628e578af1bff12d2aad50a874d0d4
     
     
     """
