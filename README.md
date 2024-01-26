@@ -71,5 +71,7 @@ pip install -r requirements.txt
 ## References
 
 [Pygame.midi](https://www.pygame.org/docs/ref/midi.html)
+
 [VGG_Demo](https://github.com/s-ito0621/VGG_Demo/tree/main)
+
 [VL53L0X-python](https://github.com/juehess/VL53L0X-python)
