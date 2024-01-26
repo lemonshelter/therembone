@@ -1,6 +1,17 @@
-# therembone
+# therembone<!-- omit in toc -->
 
 prog_jissen3
+
+## Table of Content<!-- omit in toc -->
+
+- [Execution Environment](#execution-environment)
+- [Setup](#setup)
+  - [Setup VGG\_Demo](#setup-vgg_demo)
+  - [Setup VL53L0X-python](#setup-vl53l0x-python)
+  - [Setup Pygame.midi](#setup-pygamemidi)
+  - [Install Library](#install-library)
+- [References](#references)
+
 
 ## Execution Environment
 
