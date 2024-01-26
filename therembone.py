@@ -16,7 +16,10 @@ while True:
     """
     指のクラス分類
     """
+    recognize_finger.take_pic()
+    predicted = recognize_finger.predict()
     # オクターブ情報を受け取り
+    midi_process.set_octave(predicted)
     #midi_process.set_octave(2)  # 実際は認識した値が入る
     
     

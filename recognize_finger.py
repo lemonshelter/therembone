@@ -53,7 +53,7 @@ class RecognizeFinger:
         cv2.imwrite(image_path, self.image)
         print("撮影が終わりました")
     
-    def pridict(self):
+    def predict(self):
         input = self.test_transform(Image.fromarray(self.image))
         print("推論開始")
         self.model.eval()
@@ -61,3 +61,4 @@ class RecognizeFinger:
             input = input.to(self.device)
             output = self.model(input.unsqueeze(0))
         print(f'{self.RPS_list[torch.argmax(output)]}です')
+        return int(output)
