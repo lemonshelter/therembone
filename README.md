@@ -24,8 +24,6 @@ However, it is not yet complete.
 
 ## Setup
 
-Note. This is only for Jetson.
-
 ### Setup VGG_Demo
 
 1. Clone the repository.
