@@ -1,6 +1,6 @@
-# therembone<!-- omit in toc -->
+# Therembone<!-- omit in toc -->
 
-prog_jissen3
+"Therembone" is a word coined by combining "theremin," an instrument played without using hands, and "trombone," which is played by moving the hands back and forth.
 
 ## Table of Content<!-- omit in toc -->
 
