@@ -2,13 +2,16 @@
 
 prog_jissen3
 
+## Execution Environment
+
+- jetson(jetpack4.6.2)
+- python3
+
 ## Setup
 
 Note. This is only for Jetson.
 
 ### Setup VGG_Demo
-
-Note. This is only for Jetson.
 
 1. Clone the repository.
 
@@ -28,14 +31,13 @@ python3
 >>import jetcam
 ```
 
+3. Place the learned weights file in the VGG_Demo directory.
+
 ### Setup VL53L0X-python
 
 1. Clone the repository.
 
 ```bash
-# Python2
-pip2 install git+https://github.com/pimoroni/VL53L0X-python.git
-# Python3
 pip3 install git+https://github.com/pimoroni/VL53L0X-python.git
 ```
 
@@ -47,4 +49,13 @@ git clone https://github.com/pimoroni/VL53L0X_rasp_python.git
 cd VL53L0X-python
 make
 ```
+
+### Setup Pygame.midi
+
+Please refer to the following
+
+[Jetson NanoでMIDIを使うためにカーネルビルド](https://qiita.com/karaage0703/items/9bef6aeec9ad24f647c6)
+
+## Usage
+
 
