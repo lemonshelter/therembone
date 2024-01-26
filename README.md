@@ -1,6 +1,7 @@
 # Therembone<!-- omit in toc -->
 
 "Therembone" is a word coined by combining "theremin", an instrument played without using hands, and "trombone", which is played by moving the hands back and forth.
+Using the information here, you can make such a strange instrument!
 
 ## Table of Content<!-- omit in toc -->
 
