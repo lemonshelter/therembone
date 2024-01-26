@@ -10,6 +10,7 @@ prog_jissen3
   - [Setup VL53L0X-python](#setup-vl53l0x-python)
   - [Install Library](#install-library)
   - [Setup Pygame.midi](#setup-pygamemidi)
+- [Hardware](#hardware)
 - [References](#references)
 
 
@@ -78,6 +79,22 @@ pip install -r requirements.txt
 Please refer to the following
 
 [Jetson NanoでMIDIを使うためにカーネルビルド](https://qiita.com/karaage0703/items/9bef6aeec9ad24f647c6)
+
+## Hardware
+
+[3.5mmオーディオサウンドカードHATスピーカーキット](https://www.amazon.co.jp/dp/B0C4NC73KV)
+
+[ＶＬ５３Ｌ０Ｘ使用　レーザー測距センサモジュール](https://akizukidenshi.com/catalog/g/gM-12590/)
+
+[USB２キーボード](https://amzn.asia/d/aIlDOHs)
+
+[Anker Power Bank (20000mAh, 15W)](https://amzn.asia/d/eagCC7o)
+
+[フレキシブルフラットケーブル](https://amzn.asia/d/hD5mBkL)
+
+[L字 USB Cケーブル](https://amzn.asia/d/dz1xgfY)
+
+[ショルダーバッグ](https://amzn.asia/d/9blXwSk)
 
 ## References
 
