@@ -8,8 +8,8 @@ prog_jissen3
 - [Setup](#setup)
   - [Setup VGG\_Demo](#setup-vgg_demo)
   - [Setup VL53L0X-python](#setup-vl53l0x-python)
-  - [Setup Pygame.midi](#setup-pygamemidi)
   - [Install Library](#install-library)
+  - [Setup Pygame.midi](#setup-pygamemidi)
 - [References](#references)
 
 
@@ -61,12 +61,6 @@ cd VL53L0X-python
 make
 ```
 
-### Setup Pygame.midi
-
-Please refer to the following
-
-[Jetson NanoでMIDIを使うためにカーネルビルド](https://qiita.com/karaage0703/items/9bef6aeec9ad24f647c6)
-
 ### Install Library
 
 1. Install from requirements.txt
@@ -78,6 +72,12 @@ pip install -r requirements.txt
 2. Please refer to the following to install Pytorch
 
 [Building the Project from Source](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md)
+
+### Setup Pygame.midi
+
+Please refer to the following
+
+[Jetson NanoでMIDIを使うためにカーネルビルド](https://qiita.com/karaage0703/items/9bef6aeec9ad24f647c6)
 
 ## References
 
