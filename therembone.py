@@ -26,7 +26,9 @@ while True:
     """
     距離測定
     """
+    distance = distance_sensor.measure_distance()
     # 距離の生データを受け取り
+    midi_process.set_raw_hand_distance(distance)
     #midi_process.set_raw_hand_distance(111)  # 実際は認識した値が入る
     
     
