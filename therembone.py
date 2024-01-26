@@ -1,3 +1,5 @@
+import time
+
 from recognize_finger import RecognizeFinger
 from distance_sensor import DistanceSensor
 from MIDI_process import MIDI_Process
@@ -12,7 +14,10 @@ midi2sound = MIDI2Sound()
 # hand_positionの上下限などを設定する
 midi_process.bind_keys()
 
+start_time = time.time()
+
 while True:
+    start_time = time.time()
     """
     指のクラス分類
     """
@@ -48,3 +53,6 @@ while True:
     """
     # 音を合成
     midi2sound.play_continuously(root_pitch, pitch_bend_val)
+
+    end_time = time.time()
+    print(end_time - start_time)
