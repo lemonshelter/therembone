@@ -15,7 +15,7 @@ prog_jissen3
 
 ## Execution Environment
 
-- jetson(jetpack4.6.2)
+- jetson nano(jetpack4.6.2)
 - python3.10.13
 
 ## Setup
