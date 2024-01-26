@@ -56,6 +56,20 @@ Please refer to the following
 
 [Jetson NanoでMIDIを使うためにカーネルビルド](https://qiita.com/karaage0703/items/9bef6aeec9ad24f647c6)
 
-## Usage
+### Install Library
 
+1. Install from requirements.txt
 
+```bash
+pip install -r requirements.txt
+```
+
+2. Please refer to the following to install Pytorch
+
+[Building the Project from Source](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md)
+
+## References
+
+[Pygame.midi](https://www.pygame.org/docs/ref/midi.html)
+[VGG_Demo](https://github.com/s-ito0621/VGG_Demo/tree/main)
+[VL53L0X-python](https://github.com/juehess/VL53L0X-python)
