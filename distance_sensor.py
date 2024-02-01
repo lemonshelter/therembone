@@ -21,3 +21,11 @@ class DistanceSensor:
     def stop_sensor(self):
         self.tof.stop_ranging()
         self.tof.close()
+
+
+if __name__ == "__main__":
+    distance_sensor = DistanceSensor()
+    for _ in range(100):
+        distance = distance_sensor.measure_distance()
+        print("distance : " + distance)
+        time.sleep(1)
