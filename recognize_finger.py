@@ -1,15 +1,15 @@
 import traitlets
-from jetcam.utils import bgr8_to_jpeg
+from VGG_Demo.jetcam.utils import bgr8_to_jpeg
 from IPython.display import display
 import ipywidgets
-from jetcam.csi_camera import CSICamera
+from VGG_Demo.jetcam.csi_camera import CSICamera
 import cv2
 import torch
 from torch import nn, optim
 import numpy as np
 import random
 import sys
-from src.vgg_local import VGG_LOCAL
+from VGG_Demo.src.vgg_local import VGG_LOCAL
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from PIL import Image
@@ -62,3 +62,11 @@ class RecognizeFinger:
             output = self.model(input.unsqueeze(0))
         print(f'{self.RPS_list[torch.argmax(output)]}です')
         return int(output)
+
+
+if __name__ == '__main__':
+    recognize_finger = RecognizeFinger()
+    recognize_finger.take_pic()
+    predicted = recognize_finger.predict()
+    prunt('predicted is ' + predicted)
+    
